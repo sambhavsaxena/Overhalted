@@ -7,13 +7,9 @@ const getArticles = asyncHandler(async (req, res) => {
 })
 
 const getAll = asyncHandler(async (req, res) => {
-  var date = new Date().getDate();
-  var month = new Date().getMonth();
-  var year = new Date().getFullYear();
-  var halfyearly = new Date(year, month - 6, date);
-  const finaldump = await Article.find({ createdAt: { $gt: halfyearly } }).limit(50).sort({ createdAt: -1 });
-  res.json(finaldump)
-})
+  const finaldump = await Article.find().sort({ createdAt: -1 });
+  res.json(finaldump);
+});
 
 const getArticleById = asyncHandler(async (req, res) => {
   const article = await Article.findById(req.params.id)
